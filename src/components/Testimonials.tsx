@@ -1,39 +1,76 @@
-import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Alex Rodriguez",
-      role: "Day Trader",
-      image: "https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-      content: "This AI bot has completely transformed my trading. I've seen a 340% increase in profits since I started using it 6 months ago.",
-      rating: 5,
-      profit: "+$85,000"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Crypto Investor",
-      image: "https://images.pexels.com/photos/3778564/pexels-photo-3778564.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-      content: "The risk management features are incredible. I sleep better knowing my investments are protected by advanced AI algorithms.",
-      rating: 5,
-      profit: "+$127,000"
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Portfolio Manager",
-      image: "https://images.pexels.com/photos/3777946/pexels-photo-3777946.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-      content: "As a portfolio manager, I need reliable tools. This AI trading bot consistently outperforms manual trading strategies.",
-      rating: 5,
-      profit: "+$234,000"
-    }
+  // Testimonial screenshots from the public directory
+  const allTestimonialScreenshots = [
+    { id: 1, src: '/images/Testimonials/proof1.jpeg', alt: 'Trading success screenshot 1' },
+    { id: 2, src: '/images/Testimonials/proof2.jpeg', alt: 'Trading success screenshot 2' },
+    { id: 3, src: '/images/Testimonials/proof3.jpeg', alt: 'Trading success screenshot 3' },
+    { id: 4, src: '/images/Testimonials/proof4.jpeg', alt: 'Trading success screenshot 4' },
+    { id: 5, src: '/images/Testimonials/proof5.jpeg', alt: 'Trading success screenshot 5' },
+    { id: 6, src: '/images/Testimonials/proof6.jpeg', alt: 'Trading success screenshot 6' }
   ];
+  
+  // Limit to only 4 testimonials for display
+  const testimonialScreenshots = allTestimonialScreenshots.slice(0, 4);
+  
+  // State for the carousel
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Auto-scroll functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+  
+  // No need for getVisibleItems function as we're showing one item at a time
+  
+  // Navigation functions
+  const nextSlide = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => {
+      // Only move within the 4 visible testimonials
+      return (prevIndex + 1) % testimonialScreenshots.length;
+    });
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
+  
+  const prevSlide = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentIndex((prevIndex) => {
+      // Only move within the 4 visible testimonials
+      return prevIndex === 0 ? testimonialScreenshots.length - 1 : prevIndex - 1;
+    });
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
 
   return (
-    <section className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black"></div>
+    <section className="py-24 px-6 relative overflow-hidden">
+      {/* Background gradients and effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/10 to-black"></div>
+      
+      {/* Animated background elements */}
+      <div className="absolute top-40 right-20 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+      <div className="absolute bottom-40 left-20 w-80 h-80 bg-cyan-500/5 rounded-full filter blur-3xl animate-blob"></div>
+      <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
@@ -46,50 +83,68 @@ const Testimonials = () => {
             Join thousands of traders who have revolutionized their crypto trading with our AI technology.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/10"
-              style={{ animationDelay: `${index * 200}ms` }}
+        
+        {/* Testimonial Screenshots Carousel */}
+        <div className="relative mb-16 max-w-4xl mx-auto">
+          {/* Navigation buttons */}
+          <button 
+            onClick={prevSlide} 
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-blue-500/80 hover:bg-blue-500 text-white rounded-full p-1.5 -ml-3 shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-110"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          
+          <button 
+            onClick={nextSlide} 
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-blue-500/80 hover:bg-blue-500 text-white rounded-full p-1.5 -mr-3 shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-110"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          
+          {/* Carousel container */}
+          <div className="relative overflow-hidden rounded-xl bg-[#1A1A1A] border border-gray-700/50 p-3">
+            <div 
+              className={`flex transition-transform duration-500 ease-in-out ${isAnimating ? 'opacity-80' : 'opacity-100'}`}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center mb-6">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full border-2 border-blue-500/50 mr-4"
-                  />
-                  <div>
-                    <h4 className="text-xl font-bold text-white">{testimonial.name}</h4>
-                    <p className="text-blue-400">{testimonial.role}</p>
+              {testimonialScreenshots.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="w-full flex-shrink-0 p-2 transform transition-all duration-500 hover:scale-[1.02]"
+                >
+                  <div className="h-full rounded-lg overflow-hidden border border-gray-700/50 bg-[#1A1A1A]">
+                    <div className="relative">
+                      <img 
+                        src={item.src} 
+                        alt={item.alt} 
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
-                
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                
-                <Quote className="w-8 h-8 text-blue-400/50 mb-4" />
-                
-                <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
-                  "{testimonial.content}"
-                </p>
-                
-                <div className="pt-4 border-t border-gray-700/50">
-                  <div className="text-center">
-                    <span className="text-2xl font-bold text-green-400">{testimonial.profit}</span>
-                    <p className="text-gray-400 text-sm">Profit in 6 months</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+          
+          {/* Pagination dots */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {testimonialScreenshots.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setIsAnimating(true);
+                  setCurrentIndex(index);
+                  setTimeout(() => setIsAnimating(false), 500);
+                }}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-blue-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

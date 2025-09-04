@@ -1,43 +1,44 @@
-import React from 'react';
-import { Brain, Shield, BarChart3, Zap, Target, Clock } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Brain, Shield, Zap } from 'lucide-react';
 
 const Features = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  };
+
+  const handleVideoStateChange = () => {
+    if (videoRef.current) {
+      setIsPlaying(!videoRef.current.paused);
+    }
+  };
+  
   const features = [
     {
       icon: Brain,
-      title: "Advanced AI Algorithm",
-      description: "Machine learning models trained on years of market data to identify optimal trading opportunities.",
+      title: "Advanced Trading Algorithms",
+      description: "AI-powered strategies analyze thousands of data points per second, adapting instantly to market changes.",
       color: "from-blue-500 to-cyan-400"
     },
     {
-      icon: Shield,
-      title: "Risk Management",
-      description: "Sophisticated risk control systems that protect your capital with stop-losses and position sizing.",
-      color: "from-purple-500 to-pink-400"
-    },
-    {
-      icon: BarChart3,
-      title: "Real-Time Analytics",
-      description: "Advanced charting and analytics tools that provide deep insights into market movements.",
-      color: "from-green-500 to-emerald-400"
-    },
-    {
       icon: Zap,
-      title: "Lightning Fast Execution",
-      description: "Ultra-low latency trading execution that captures opportunities in milliseconds.",
+      title: "Automated Execution",
+      description: "Effortless trading with lightning-fast order execution, removing human error and delivering consistent performance.",
       color: "from-yellow-500 to-orange-400"
     },
     {
-      icon: Target,
-      title: "Precision Trading",
-      description: "Highly accurate entry and exit points based on technical analysis and market sentiment.",
-      color: "from-red-500 to-rose-400"
-    },
-    {
-      icon: Clock,
-      title: "24/7 Operation",
-      description: "Never miss a trading opportunity with round-the-clock automated monitoring and execution.",
-      color: "from-indigo-500 to-blue-400"
+      icon: Shield,
+      title: "Risk Management Features",
+      description: "Implements dynamic stop-loss, take-profit, and drawdown control to protect capital and optimize returns.",
+      color: "from-purple-500 to-pink-400"
     }
   ];
 
@@ -46,18 +47,48 @@ const Features = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              Cutting-Edge
+              Maximize Your Daily
             </span>
             <br />
-            <span className="text-white">AI Technology</span>
+            <span className="text-white">Returns With AI</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Our AI trading bot leverages advanced machine learning algorithms to analyze market patterns 
-            and execute profitable trades with unprecedented accuracy.
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+            AI isn't a trend. Institutions are using AI to gain a measurable edge. KinnoBot applies
+            the same intelligence to the markets.
           </p>
+          
+          {/* Video Container */}
+          <div className="max-w-4xl mx-auto mb-8 relative rounded-2xl overflow-hidden shadow-2xl shadow-blue-500/20">
+            <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-gray-900 to-blue-900/50">
+              <video 
+                ref={videoRef}
+                className="w-full h-full object-cover" 
+                controls 
+                poster="/images/thumbnail1.png"
+                onPlay={handleVideoStateChange}
+                onPause={handleVideoStateChange}
+                onEnded={() => setIsPlaying(false)}
+              >
+                <source src="/videos/KinoStory.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            {!isPlaying && (
+              <div 
+                className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                onClick={handlePlayVideo}
+              >
+                <div className="w-20 h-20 rounded-full bg-blue-500/80 flex items-center justify-center backdrop-blur-sm transition-transform duration-300 transform hover:scale-110">
+                  <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -85,7 +116,15 @@ const Features = () => {
             </div>
           ))}
         </div>
+
+        <div className="flex justify-center mt-12">
+        <button className="px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
+          Trade Smarter, Not Harder with KinnoBot
+        </button>
       </div>
+      </div>
+      
+      
     </section>
   );
 };

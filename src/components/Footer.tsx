@@ -1,5 +1,4 @@
-import React from 'react';
-import { Bot, Twitter, Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
+import { Twitter, Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -14,18 +13,57 @@ const Footer = () => {
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-white">Ready to</span>
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Start Trading Smarter</span>
                 <br />
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                  Revolutionize Your Trading?
+                <span className="text-blue-500">
+                  Today
                 </span>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join the AI trading revolution today and start earning passive income from cryptocurrency markets.
+                Join over 500 traders who have already transformed their trading with KinnoBot's AI-powered automation
               </p>
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 glow-button">
-                Start Free Trial
-              </button>
+              
+              <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="bg-gray-900 rounded-full p-2">
+                    <svg className="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 12L5 9M5 9L8 12M5 9V15M22 12L19 15M19 15L16 12M19 15V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-white font-medium">8.2% Avg. Monthly Return</span>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <div className="bg-gray-900 rounded-full p-2">
+                    <svg className="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-white font-medium">30-Day Money-Back Guarantee</span>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <div className="bg-gray-900 rounded-full p-2">
+                    <svg className="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-white font-medium">Setup in Under 10 Minutes</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
+                  Get KinnoBot Now
+                </button>
+                <button className="px-8 py-4 border border-cyan-500/50 text-cyan-400 rounded-md font-semibold text-lg transition-all duration-300 hover:bg-cyan-500/10">
+                  See Performance Data
+                </button>
+              </div>
+              
+              <p className="text-gray-400 text-sm mt-6">
+                Secure checkout via credit card, PayPal, or crypto • Instant delivery • 24/7 support
+              </p>
             </div>
           </div>
         </div>
@@ -35,10 +73,14 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-400 p-2 mr-3">
-                <Bot className="w-6 h-6 text-white" />
+              <div className="mr-3">
+                <img 
+                src="/images/kinnobotlogo.png" 
+                alt="KinnoBot Logo" 
+                className="w-10 h-10 object-contain" 
+                />
               </div>
-              <span className="text-2xl font-bold text-white">CryptoAI</span>
+              <span className="text-2xl font-bold text-white">KinnoBot</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
               The future of cryptocurrency trading powered by artificial intelligence. 
@@ -109,7 +151,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 mb-4 md:mb-0">
-              © 2025 CryptoAI. All rights reserved.
+              © 2025 KinnoBot. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
