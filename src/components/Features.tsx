@@ -67,7 +67,7 @@ const Features = () => {
                 ref={videoRef}
                 className="w-full h-full object-cover" 
                 controls 
-                poster="/images/thumbnail1.png"
+                poster="/images/thumbnail.png"
                 onPlay={handleVideoStateChange}
                 onPause={handleVideoStateChange}
                 onEnded={() => setIsPlaying(false)}
