@@ -252,13 +252,50 @@ const Pricing = () => {
                       </div>
                     )}
                     
-                    <ul className="space-y-2 mb-4">
+                    {/* <ul className="space-y-2 mb-4">
                       {plan.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start">
                           <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
                           <span className="text-gray-300 text-sm">{feature}</span>
                         </li>
                       ))}
+                    </ul> */}
+
+                    <ul className="space-y-2 mb-4">
+                      {plan.features.map((feature, featureIndex) => {
+                        // Color mapping
+                        const colorMap = {
+                          Basic: 'text-white',
+                          Pro: 'text-cyan-400',
+                          Elite: 'text-purple-400'
+                        };
+
+                        // Extract keyword if matched
+                        const match = feature.match(/Everything in (Basic|Pro|Elite)/);
+
+                        if (match) {
+                          const level = match[1]; // "Basic", "Pro", or "Elite"
+                          return (
+                            <li key={featureIndex} className="flex items-start">
+                              <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-300 text-sm">
+                                Everything in{' '}
+                                <span className={colorMap[level as keyof typeof colorMap]}>
+                                  {level}
+                                </span>
+                              </span>
+                            </li>
+                          );
+                        }
+
+                        // Fallback for other features
+                        return (
+                          <li key={featureIndex} className="flex items-start">
+                            <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-300 text-sm">{feature}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
                     
                     <button className={`w-full py-3 rounded-xl font-medium text-sm transition-all duration-300 ${
@@ -375,13 +412,50 @@ const Pricing = () => {
                   </div>
                 )}
                 
-                <ul className="space-y-4 mb-8">
+                {/* <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start">
                       <Check className="w-5 h-5 text-green-400 mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-300">{feature}</span>
                     </li>
                   ))}
+                </ul> */}
+
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature, featureIndex) => {
+                    // Color mapping
+                    const colorMap = {
+                      Basic: 'text-white',
+                      Pro: 'text-cyan-400',
+                      Elite: 'text-purple-400'
+                    };
+
+                    // Extract keyword if matched
+                    const match = feature.match(/Everything in (Basic|Pro|Elite)/);
+
+                    if (match) {
+                      const level = match[1]; // "Basic", "Pro", or "Elite"
+                      return (
+                        <li key={featureIndex} className="flex items-start">
+                          <Check className="w-5 h-5 text-green-400 mr-3 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-300">
+                            Everything in{' '}
+                            <span className={colorMap[level as keyof typeof colorMap]}>
+                              {level}
+                            </span>
+                          </span>
+                        </li>
+                      );
+                    }
+
+                    // Fallback for other features
+                    return (
+                      <li key={featureIndex} className="flex items-start">
+                        <Check className="w-5 h-5 text-green-400 mr-3 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
                 
                 <button className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 ${
