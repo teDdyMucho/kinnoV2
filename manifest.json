@@ -1,0 +1,28 @@
+{
+  "name": "KinnoBot",
+  "short_name": "KinnoBot",
+  "description": "KinnoBot - The AI That Trades For You",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000a1e",
+  "theme_color": "#000a1e",
+  "categories": ["productivity", "ai"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/images/kinnobotlogo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/kinnobotlogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

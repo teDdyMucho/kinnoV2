@@ -1,9 +1,40 @@
 import { Twitter, Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 
-const Footer = () => {
+type FooterProps = {
+  from?: string; // previous section color at the top edge
+  to?: string;   // footer base color at the top edge
+};
+
+function hexToRGBA(hex: string, alpha: number) {
+  const match = hex.trim().match(/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
+  if (!match) return hex; // fallback: return as-is
+  let c = match[1];
+  if (c.length === 3) {
+    c = c.split('').map((ch) => ch + ch).join('');
+  }
+  const r = parseInt(c.slice(0, 2), 16);
+  const g = parseInt(c.slice(2, 4), 16);
+  const b = parseInt(c.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+const Footer: React.FC<FooterProps> = ({ from = '#0d1324', to = '#101725' }) => {
   return (
-    <footer className="relative py-24 px-6">
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-gray-900"></div>
+    <footer className="relative py-24 px-6 overflow-visible">
+      {/* Base background uses provided 'to' color and fades to black */}
+      <div className="absolute inset-0" style={{
+        background: `linear-gradient(180deg, ${to} 0%, #000000 100%)`
+      }}></div>
+      {/* Top blend feather to eliminate any residual seam */}
+      <div
+        className="absolute -top-24 left-0 right-0 h-24 pointer-events-none"
+        style={{
+          background: `linear-gradient(180deg, ${hexToRGBA(from, 0)} 0%, ${hexToRGBA(from, 0.35)} 35%, ${hexToRGBA(to, 0.9)} 100%)`,
+          filter: 'blur(16px)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)'
+        }}
+      />
       
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* CTA Section */}

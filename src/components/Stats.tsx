@@ -55,7 +55,7 @@ const Stats = () => {
 
   return (
     <section className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-black to-blue-950/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0d1324]/10 to-black"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-16">
