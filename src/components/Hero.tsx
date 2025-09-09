@@ -66,7 +66,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pb-44 sm:pb-32 md:pb-0">
           <div className="mb-8 hero-boot">
             <img 
               src="/images/kinnobotlogo.png" 
@@ -141,12 +141,18 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-30 pointer-events-none">
+      <div
+        className="absolute bottom-3 sm:bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-30 pointer-events-none"
+        style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
+      >
         <div className="w-6 h-10 border-2 border-blue-400/60 rounded-full flex justify-center bg-black/10 backdrop-blur-sm">
           <div className="w-1 h-3 bg-blue-400 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
+      
     </section>
+   
+
   );
 };
 
