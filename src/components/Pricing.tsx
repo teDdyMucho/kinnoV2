@@ -53,7 +53,10 @@ const Pricing = () => {
       period: "/month",
       description: "Perfect for beginners starting with AI trading",
       features: [
-        "Everything in Basic"
+        // "Everything in Basic"
+        "KinnoBot Trading AI",
+        "Install Guide (docs + videos)",
+        "Default Settings"
       ],
       popular: false,
       gradient: "from-gray-600 to-gray-700",
@@ -67,9 +70,17 @@ const Pricing = () => {
       period: "/year",
       description: "Best value for serious traders",
       features: [
-        "Everything in Basic",
-        "Everything in Pro"
+        // "Everything in Basic",
+        // "Everything in Pro"
+        "KinnoBot Trading AI",
+        "Install Guide (docs + videos)",
+        "Default Settings",
+        "1-on-1 Set Up Call",
+        "Kinno's Setting Updates",
+        "Future Bot Upgrades",
+        "Priority Support"
       ],
+      featuresType: "Basic",
       popular: true,
       gradient: "from-blue-600 to-cyan-500",
       hoverGradient: "hover:from-blue-500 hover:to-cyan-400",
@@ -84,10 +95,21 @@ const Pricing = () => {
       period: "With Us!",
       description: "Maximum performance for institutional traders",
       features: [
-        "Everything in Basic",
-        "Everything in Pro",
-        "Everything in Elite"
+        // "Everything in Basic",
+        // "Everything in Pro",
+        // "Everything in Elite"
+        "KinnoBot Trading AI",
+        "Install Guide (docs + videos)",
+        "Default Settings",
+        "1-on-1 Set Up Call",
+        "Kinno's Setting Updates",
+        "Future Bot Upgrades",
+        "Priority Support",
+        "Private Discord Access",
+        "Weekly Coaching Calls",
+        "Private Investor Network"
       ],
+      featuresType: "Pro",
       popular: false,
       gradient: "from-purple-600 to-pink-500",
       hoverGradient: "hover:from-purple-500 hover:to-pink-400",
@@ -154,7 +176,7 @@ const Pricing = () => {
 
         {/* Mobile pricing cards slider view - Tinder style */}
         <div className="block md:hidden mb-12 relative">
-          <div className="relative overflow-hidden pb-4 h-[500px]">
+          <div className="relative overflow-hidden pb-4 h-[700px]">
             <div 
               ref={sliderRef}
               className="relative w-full h-full flex justify-center items-center" 
@@ -252,15 +274,7 @@ const Pricing = () => {
                       </div>
                     )}
                     
-                    {/* <ul className="space-y-2 mb-4">
-                      {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-300 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul> */}
-
+                    {/* Features List */}
                     <ul className="space-y-2 mb-4">
                       {plan.features.map((feature, featureIndex) => {
                         // Color mapping
@@ -297,7 +311,7 @@ const Pricing = () => {
                         );
                       })}
                     </ul>
-                    
+
                     <button className={`w-full py-3 rounded-xl font-medium text-sm transition-all duration-300 ${
                       plan.popular
                         ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white animate-pulse-slow'
@@ -307,6 +321,22 @@ const Pricing = () => {
                     }`}>
                       {plan.cta}
                     </button>
+
+                    <div className="flex justify-center items-center mt-4">
+                      <span className="text-gray-300">
+                        {plan.name !== "Basic" && "Everything in "}
+                        <span className={
+                          plan.featuresType === "Basic" 
+                            ? "text-gray-400"  
+                            : plan.featuresType === "Elite" 
+                              ? "text-pink-400" 
+                              : "text-cyan-400"
+                        }>
+                          {plan.featuresType} 
+                        </span>
+                      </span>
+                    </div>
+
                   </div>
                 </div>
               ))}
@@ -421,42 +451,43 @@ const Pricing = () => {
                   ))}
                 </ul> */}
 
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, featureIndex) => {
-                    // Color mapping
-                    const colorMap = {
-                      Basic: 'text-white',
-                      Pro: 'text-cyan-400',
-                      Elite: 'text-purple-400'
-                    };
+                    <ul className="space-y-2 mb-4">
+                      {plan.features.map((feature, featureIndex) => {
+                        // Color mapping
+                        const colorMap = {
+                          Basic: 'text-white',
+                          Pro: 'text-cyan-400',
+                          Elite: 'text-purple-400'
+                        };
 
-                    // Extract keyword if matched
-                    const match = feature.match(/Everything in (Basic|Pro|Elite)/);
+                        // Extract keyword if matched
+                        const match = feature.match(/Everything in (Basic|Pro|Elite)/);
 
-                    if (match) {
-                      const level = match[1]; // "Basic", "Pro", or "Elite"
-                      return (
-                        <li key={featureIndex} className="flex items-start">
-                          <Check className="w-5 h-5 text-green-400 mr-3 flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-300">
-                            Everything in{' '}
-                            <span className={colorMap[level as keyof typeof colorMap]}>
-                              {level}
-                            </span>
-                          </span>
-                        </li>
-                      );
-                    }
+                        if (match) {
+                          const level = match[1]; // "Basic", "Pro", or "Elite"
+                          return (
+                            <li key={featureIndex} className="flex items-start">
+                              <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
+                              <span className="text-gray-300 text-sm">
+                                Everything in{' '}
+                                <span className={colorMap[level as keyof typeof colorMap]}>
+                                  {level}
+                                </span>
+                              </span>
+                            </li>
+                          );
+                        }
 
-                    // Fallback for other features
-                    return (
-                      <li key={featureIndex} className="flex items-start">
-                        <Check className="w-5 h-5 text-green-400 mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">{feature}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
+                        // Fallback for other features
+                        return (
+                          <li key={featureIndex} className="flex items-start">
+                            <Check className="w-4 h-4 text-green-400 mr-2 flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-300 text-sm">{feature}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+
                 
                 <button className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 ${
                   plan.popular
@@ -467,6 +498,22 @@ const Pricing = () => {
                 }`}>
                   {plan.cta}
                 </button>
+                
+                <div className="flex justify-center items-center mt-4">
+                    <span className="text-gray-300">
+                      {plan.name !== "Basic" && "Everything in "}
+                      <span className={
+                        plan.featuresType === "Basic" 
+                          ? "text-gray-400"  
+                          : plan.featuresType === "Elite" 
+                            ? "text-pink-400" 
+                            : "text-cyan-400"
+                      }>
+                        {plan.featuresType} 
+                      </span>
+                    </span>
+                  </div>
+
               </div>
             </div>
           ))}
