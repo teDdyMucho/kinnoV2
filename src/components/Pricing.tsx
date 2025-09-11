@@ -111,8 +111,8 @@ const Pricing = () => {
       ],
       featuresType: "Pro",
       popular: false,
-      gradient: "from-amber-600 to-yellow-400",
-      hoverGradient: "hover:from-amber-700 hover:to-yellow-500",
+      gradient: "from-[#d4af37] via-[#f9df85] to-[#d4af37]",
+      hoverGradient: "hover:from-[#d4af37] hover:via-[#f9df85] hover:to-[#d4af37]",
       cta: "Contact Us"
     }
   ];
@@ -222,15 +222,15 @@ const Pricing = () => {
                     plan.popular 
                       ? 'bg-gradient-to-br from-blue-900/50 to-cyan-900/30 border-blue-500/50 shadow-2xl shadow-blue-500/20' 
                       : plan.name === "Elite"
-                        ? 'bg-gradient-to-br from-amber-900/50 to-yellow-900/30 border-amber-500/50 shadow-xl shadow-amber-500/10'
+                        ? 'bg-gradient-to-br from-[#d4af37]/30 via-[#f9df85]/20 to-[#d4af37]/30 border-[#d4af37]/50 shadow-xl shadow-[#d4af37]/10'
                         : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50'
                   } ${
                     index === currentCardIndex 
                       ? 'z-10 scale-100 opacity-100' 
                       : index === currentCardIndex - 1
-                        ? 'z-5 scale-90 opacity-20 -translate-x-[70%] rotate-[-5deg] blur-[1px]'
+                        ? 'z-5 scale-90 opacity-50 -translate-x-[70%] rotate-[-5deg] blur-[1px]'
                       : index === currentCardIndex + 1
-                        ? 'z-5 scale-90 opacity-20 translate-x-[70%] rotate-[5deg] blur-[1px]'
+                        ? 'z-5 scale-90 opacity-50 translate-x-[70%] rotate-[5deg] blur-[1px]'
                       : index < currentCardIndex 
                         ? 'z-0 scale-80 opacity-0 -translate-x-[200%]' 
                         : index > currentCardIndex 
@@ -256,8 +256,8 @@ const Pricing = () => {
                   )}
                   
                   <div className="relative z-10">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${plan.gradient} p-3 mb-4`}>
-                      <plan.icon className="w-6 h-6 text-white" />
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${plan.gradient} p-3 mb-4 ${plan.name === "Elite" ? 'shadow-inner shadow-white/20' : ''}`}>
+                      <plan.icon className={`w-6 h-6 ${plan.name === "Elite" ? 'text-gray-800' : 'text-white'}`} />
                     </div>
                     
                     <h3 className="text-xl font-bold text-white mb-1">{plan.name}</h3>
@@ -322,7 +322,7 @@ const Pricing = () => {
                       plan.popular
                         ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white animate-pulse-slow'
                         : plan.name === "Elite" 
-                          ? 'bg-gradient-to-r from-amber-600 to-yellow-400 text-white'
+                          ? 'bg-gradient-to-r from-[#d4af37] via-[#f9df85] to-[#d4af37] text-gray-800 font-semibold'
                           : 'bg-gray-800 text-white border border-gray-600'
                     }`}>
                       {plan.cta}
@@ -412,7 +412,7 @@ const Pricing = () => {
                 plan.popular 
                   ? 'bg-gradient-to-br from-blue-900/50 to-cyan-900/30 border-blue-500/50 shadow-2xl shadow-blue-500/20' 
                   : plan.name === "Elite"
-                    ? 'bg-gradient-to-br from-amber-900/50 to-yellow-900/30 border-amber-500/50 shadow-xl shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/20'
+                    ? 'bg-gradient-to-br from-[#d4af37]/30 via-[#f9df85]/20 to-[#d4af37]/30 border-[#d4af37]/50 shadow-xl shadow-[#d4af37]/10 hover:shadow-2xl hover:shadow-[#d4af37]/20'
                     : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50 hover:border-blue-500/30'
               }`}
               style={{ animationDelay: `${index * 200}ms` }}
@@ -426,8 +426,8 @@ const Pricing = () => {
               )}
               
               <div className="relative z-10">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${plan.gradient} p-4 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <plan.icon className="w-8 h-8 text-white" />
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${plan.gradient} p-4 mb-6 group-hover:scale-110 transition-transform duration-300 ${plan.name === "Elite" ? 'shadow-inner shadow-white/20' : ''}`}>
+                  <plan.icon className={`w-8 h-8 ${plan.name === "Elite" ? 'text-gray-800' : 'text-white'}`} />
                 </div>
                 
                 <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
@@ -501,7 +501,7 @@ const Pricing = () => {
                   plan.popular
                     ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-2xl hover:shadow-blue-500/25 animate-pulse-slow'
                     : plan.name === "Elite" 
-                      ? 'bg-gradient-to-r from-amber-600 to-yellow-400 text-white hover:shadow-2xl hover:shadow-amber-500/25'
+                      ? 'bg-gradient-to-r from-[#d4af37] via-[#f9df85] to-[#d4af37] text-gray-800 font-semibold hover:shadow-2xl hover:shadow-[#d4af37]/25'
                       : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600 hover:border-blue-500'
                 }`}>
                   {plan.cta}
