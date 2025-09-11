@@ -70,11 +70,11 @@ const Pricing = () => {
       period: "/year",
       description: "Best value for serious traders",
       features: [
-        // "Everything in Basic",
+        "Everything in Basic",
         // "Everything in Pro"
-        "KinnoBot Trading AI",
-        "Install Guide (docs + videos)",
-        "Default Settings",
+        // "KinnoBot Trading AI",
+        // "Install Guide (docs + videos)",
+        // "Default Settings",
         "1-on-1 Set Up Call",
         "Kinno's Setting Updates",
         "Future Bot Upgrades",
@@ -95,24 +95,24 @@ const Pricing = () => {
       period: "With Us!",
       description: "Maximum performance for institutional traders",
       features: [
-        // "Everything in Basic",
-        // "Everything in Pro",
+        "Everything in Basic",
+        "Everything in Pro",
         // "Everything in Elite"
-        "KinnoBot Trading AI",
-        "Install Guide (docs + videos)",
-        "Default Settings",
-        "1-on-1 Set Up Call",
-        "Kinno's Setting Updates",
-        "Future Bot Upgrades",
-        "Priority Support",
+        // "KinnoBot Trading AI",
+        // "Install Guide (docs + videos)",
+        // "Default Settings",
+        // "1-on-1 Set Up Call",
+        // "Kinno's Setting Updates",
+        // "Future Bot Upgrades",
+        // "Priority Support",
         "Private Discord Access",
         "Weekly Coaching Calls",
         "Private Investor Network"
       ],
       featuresType: "Pro",
       popular: false,
-      gradient: "from-purple-600 to-pink-500",
-      hoverGradient: "hover:from-purple-500 hover:to-pink-400",
+      gradient: "from-amber-600 to-yellow-400",
+      hoverGradient: "hover:from-amber-700 hover:to-yellow-500",
       cta: "Contact Us"
     }
   ];
@@ -176,10 +176,10 @@ const Pricing = () => {
 
         {/* Mobile pricing cards slider view - Tinder style */}
         <div className="block md:hidden mb-12 relative">
-          <div className="relative overflow-hidden pb-4 h-[700px]">
+          <div className="relative overflow-visible pb-4 h-[700px]">
             <div 
               ref={sliderRef}
-              className="relative w-full h-full flex justify-center items-center" 
+              className="relative w-full h-full flex justify-center items-center overflow-visible" 
             >
               {plans.map((plan, index) => (
                 <div
@@ -221,15 +221,21 @@ const Pricing = () => {
                   className={`absolute w-[280px] p-6 rounded-3xl backdrop-blur-sm border transition-all duration-300 ${
                     plan.popular 
                       ? 'bg-gradient-to-br from-blue-900/50 to-cyan-900/30 border-blue-500/50 shadow-2xl shadow-blue-500/20' 
-                      : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50'
+                      : plan.name === "Elite"
+                        ? 'bg-gradient-to-br from-amber-900/50 to-yellow-900/30 border-amber-500/50 shadow-xl shadow-amber-500/10'
+                        : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50'
                   } ${
                     index === currentCardIndex 
                       ? 'z-10 scale-100 opacity-100' 
+                      : index === currentCardIndex - 1
+                        ? 'z-5 scale-90 opacity-20 -translate-x-[70%] rotate-[-5deg] blur-[1px]'
+                      : index === currentCardIndex + 1
+                        ? 'z-5 scale-90 opacity-20 translate-x-[70%] rotate-[5deg] blur-[1px]'
                       : index < currentCardIndex 
-                        ? 'z-0 scale-90 opacity-0 -translate-x-[200%]' 
+                        ? 'z-0 scale-80 opacity-0 -translate-x-[200%]' 
                         : index > currentCardIndex 
-                          ? 'z-0 scale-90 opacity-0 translate-x-[200%]' 
-                          : 'z-0 scale-90 opacity-0'
+                          ? 'z-0 scale-80 opacity-0 translate-x-[200%]' 
+                          : 'z-0 scale-80 opacity-0'
                   } ${
                     index === currentCardIndex && isDragging
                       ? `transform translate-x-[${offsetX}px] ${swipeDirection === 'right' ? 'rotate-3' : swipeDirection === 'left' ? '-rotate-3' : ''}` 
@@ -281,7 +287,7 @@ const Pricing = () => {
                         const colorMap = {
                           Basic: 'text-white',
                           Pro: 'text-cyan-400',
-                          Elite: 'text-purple-400'
+                          Elite: 'text-amber-400'
                         };
 
                         // Extract keyword if matched
@@ -316,13 +322,13 @@ const Pricing = () => {
                       plan.popular
                         ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white animate-pulse-slow'
                         : plan.name === "Elite" 
-                          ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white'
+                          ? 'bg-gradient-to-r from-amber-600 to-yellow-400 text-white'
                           : 'bg-gray-800 text-white border border-gray-600'
                     }`}>
                       {plan.cta}
                     </button>
 
-                    <div className="flex justify-center items-center mt-4">
+                    {/* <div className="flex justify-center items-center mt-4">
                       <span className="text-gray-300">
                         {plan.name !== "Basic" && "Everything in "}
                         <span className={
@@ -335,7 +341,7 @@ const Pricing = () => {
                           {plan.featuresType} 
                         </span>
                       </span>
-                    </div>
+                    </div> */}
 
                   </div>
                 </div>
@@ -388,10 +394,10 @@ const Pricing = () => {
             
             {/* Swipe hint animation */}
             <div className="flex justify-center mt-6">
-              <div className="flex items-center text-gray-400 text-sm swipe-hint">
-                <ChevronLeft className="w-4 h-4 mr-1" />
+              <div className="flex items-center bg-gray-800/80 px-4 py-2 rounded-full border border-gray-700/50 text-gray-300 text-sm swipe-hint-enhanced">
+                <ChevronLeft className="w-5 h-5 mr-2 text-blue-400 animate-pulse" />
                 <span>Swipe to compare plans</span>
-                <ChevronRight className="w-4 h-4 ml-1" />
+                <ChevronRight className="w-5 h-5 ml-2 text-blue-400 animate-pulse" />
               </div>
             </div>
           </div>
@@ -405,7 +411,9 @@ const Pricing = () => {
               className={`group relative p-8 rounded-3xl backdrop-blur-sm border transition-all duration-500 hover:scale-105 ${
                 plan.popular 
                   ? 'bg-gradient-to-br from-blue-900/50 to-cyan-900/30 border-blue-500/50 shadow-2xl shadow-blue-500/20' 
-                  : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50 hover:border-blue-500/30'
+                  : plan.name === "Elite"
+                    ? 'bg-gradient-to-br from-amber-900/50 to-yellow-900/30 border-amber-500/50 shadow-xl shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/20'
+                    : 'bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50 hover:border-blue-500/30'
               }`}
               style={{ animationDelay: `${index * 200}ms` }}
             >
@@ -457,7 +465,7 @@ const Pricing = () => {
                         const colorMap = {
                           Basic: 'text-white',
                           Pro: 'text-cyan-400',
-                          Elite: 'text-purple-400'
+                          Elite: 'text-amber-400'
                         };
 
                         // Extract keyword if matched
@@ -493,13 +501,13 @@ const Pricing = () => {
                   plan.popular
                     ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:shadow-2xl hover:shadow-blue-500/25 animate-pulse-slow'
                     : plan.name === "Elite" 
-                      ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:shadow-2xl hover:shadow-purple-500/25'
+                      ? 'bg-gradient-to-r from-amber-600 to-yellow-400 text-white hover:shadow-2xl hover:shadow-amber-500/25'
                       : 'bg-gray-800 text-white hover:bg-gray-700 border border-gray-600 hover:border-blue-500'
                 }`}>
                   {plan.cta}
                 </button>
                 
-                <div className="flex justify-center items-center mt-4">
+                {/* <div className="flex justify-center items-center mt-4">
                     <span className="text-gray-300">
                       {plan.name !== "Basic" && "Everything in "}
                       <span className={
@@ -512,7 +520,7 @@ const Pricing = () => {
                         {plan.featuresType} 
                       </span>
                     </span>
-                  </div>
+                  </div> */}
 
               </div>
             </div>
@@ -538,7 +546,7 @@ const Pricing = () => {
                 <div className="text-gray-300 font-medium">Feature</div>
                 <div className="text-center text-gray-300 font-medium">Basic</div>
                 <div className="text-center text-cyan-400 font-medium">Pro</div>
-                <div className="text-center text-purple-400 font-medium">Elite</div>
+                <div className="text-center text-amber-400 font-medium">Elite</div>
               </div>
               
               {comparisonFeatures.map((feature, index) => (
@@ -611,6 +619,17 @@ const Pricing = () => {
         
         .swipe-hint {
           animation: swipeHint 2s infinite ease-in-out;
+        }
+        
+        @keyframes swipeHintEnhanced {
+          0% { transform: translateX(-8px); box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
+          50% { transform: translateX(8px); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+          100% { transform: translateX(-8px); box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        .swipe-hint-enhanced {
+          animation: swipeHintEnhanced 3s infinite ease-in-out;
+          transition: all 0.3s ease;
         }
         
         @keyframes cardAppear {
